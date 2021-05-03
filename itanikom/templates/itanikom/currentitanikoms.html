@@ -1,0 +1,30 @@
+{% extends "itanikom/base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            {% if itanikoms %}
+                 <h1>{{ itanikoms.count }} Current Itaŋikom{{ itanikoms.count|pluralize }}</h1>
+            {% else %}
+                           <h1>Current Itaŋikoms</h1>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+        {% if itanikoms %}
+            <div class="list-group">
+                {% for itanikom in itanikoms %}
+                    <a href="{% url 'viewitanikom' itanikom.id %}" class="list-group-item list-group-item-action{% if itanikom.important %} list-group-item-danger{% endif %}"><b>{{ itanikom.title }}</b>{% if itanikom.memo %} - {{ itanikom.memo|truncatechars:30 }}{% endif %}</a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center">
+                <h2>Looks like you don't have any itaŋikom poems yet! Pen one Now! Nice work.</h2>
+            <br>
+            <a role="button" class="btn btn-primary" href="{% url 'createitanikom' %}">New Itaŋikom Poetry</a>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends  'itanikom/base.html' %}
+
+{% block content %}
+
+Completed
+
+<ul>
+  {% for itanikom in itanikoms %}
+  <li>
+    <a href="{% url 'viewitanikom' itanikom.id %}">
+    {% if itanikom.important %}<b>{% endif %}{{ itanikom.title }}{% if itanikom.important %}</b>{% endif %}
+    {% if itanikom.memoItanikom %} - {{ itanikom.memoItanikom }}{% endif %}
+    {{ itanikom.datecompleted|date:'M j Y H:i' }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
